@@ -33,9 +33,6 @@ export default class PrisonersDilemma {
   }
 
   simulateGame(playerOne, playerTwo) {
-    let playerOneScore = 0;
-    let playerTwoScore = 0;
-
     for (let i = 0; i < this.iterations; i++) {
       const playerOneBetray = playerOne.play(i);
       const playerTwoBetray = playerTwo.play(i);
