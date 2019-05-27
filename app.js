@@ -23,14 +23,18 @@ io.on('connection', function(socket) {
     console.log('user disconnected');
     console.log('socket.id:' , socket.id);
     // send message to room that user has connected
-    var leavingRoom = Object.keys(socket.rooms).filter(item => item!=socket.id);
-    console.log('leavingRoom: ', leavingRoom);
-    io.sockets.in(leavingRoom).emit('msg', 'User ' + socket.id + ' left the room.');
+    var currentRoom = Object.keys(socket.rooms).filter(item => item!=socket.id);
+    console.log('currentRoom: ', currentRoom);
+    io.sockets.in(currentRoom).emit('msg', 'User ' + socket.id + ' left the room.');
    });
 
-  socket.on('button', function(msg) {
-    console.log('button click from client');
-    io.emit('button', msg);
+  socket.on('choice', function(choice) {
+    var currentRoom = Object.keys(socket.rooms).filter(item => item!=socket.id);
+    socket.to(currentRoom).emit('msg', 'Your opponent has made a choice.');
+    socket.to(currentRoom).emit('opponentChoice', null);
+
+    // TODO: check if both players in the room have made a choice
+    // io.emit('choice:', choice);
   });
 });
 

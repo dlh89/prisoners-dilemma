@@ -2,11 +2,14 @@ var server = 'http://localhost';
 var port = '1337';
 
 var socket = io();
-var myButton = document.getElementById('myButton');
-myButton.addEventListener('click', function() {
-  socket.emit('button', 'button clicked');
-});
+var betray = document.getElementById('betray');
 
+document.addEventListener('click', function(e) {
+  if (e.target.id == 'betray' || e.target.id == 'silent') {
+    var choice = e.target.id;
+    socket.emit('choice', choice);
+  }
+});
 
 // listen for events
 socket.on('button', function(data) {
