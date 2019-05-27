@@ -2,6 +2,7 @@ export default class TitForTat {
   constructor() {
     this.name = 'Tit for tat';
     this.opponentHistory = [];
+    this.score = 0;
   }
 
   play(iteration) {
