@@ -1,32 +1,43 @@
 import PrisonersDilemma from './PrisonersDilemma';
 import TitForTat from './strategies/TitForTat';
+import HardTitForTat from './strategies/HardTitForTat';
+import Pavlov from './strategies/Pavlov';
+import Spiteful from './strategies/Spiteful';
 import RandomChoice from './strategies/RandomChoice';
 import AlwaysBetray from './strategies/AlwaysBetray';
 import AlwaysCooperate from './strategies/AlwaysCooperate';
 
 const prisonersDilemma = new PrisonersDilemma();
 
-const titForTat = new TitForTat();
-const randomChoice = new RandomChoice();
-const alwaysBetray = new AlwaysBetray();
-const alwaysCooperate = new AlwaysCooperate();
+const titForTat = new TitForTat('Tit for Tat');
+const hardTitForTat = new HardTitForTat('Hard Tit for Tat');
+const pavlov = new Pavlov('Pavlov');
+const spiteful = new Spiteful('Spiteful');
+const randomChoice = new RandomChoice('Random Choice');
+const alwaysBetray = new AlwaysBetray('Always Betray');
+const alwaysCooperate = new AlwaysCooperate('Always Cooperate');
 
-// all play against each other
-prisonersDilemma.simulateGame(titForTat, randomChoice);
-prisonersDilemma.simulateGame(titForTat, alwaysBetray);
-prisonersDilemma.simulateGame(titForTat, alwaysCooperate);
-prisonersDilemma.simulateGame(randomChoice, alwaysBetray);
-prisonersDilemma.simulateGame(randomChoice, alwaysCooperate);
-prisonersDilemma.simulateGame(alwaysBetray, alwaysCooperate);
+const players = [
+  titForTat,
+  hardTitForTat,
+  pavlov,
+  spiteful,
+  randomChoice,
+  alwaysBetray,
+  alwaysCooperate
+]
 
-// all play against themselves
-prisonersDilemma.simulateGame(titForTat, titForTat);
-prisonersDilemma.simulateGame(randomChoice, randomChoice);
-prisonersDilemma.simulateGame(alwaysBetray, alwaysBetray);
-prisonersDilemma.simulateGame(alwaysCooperate, alwaysCooperate);
+players.forEach(function(player) {
+  // play against every player they haven't already faced (including themselves)
+  players.forEach(function(opponent) {
+    // ignore opponents already faced
+    if (!player.opponentsFaced.includes(opponent.name)) {
+      prisonersDilemma.simulateGame(player, opponent);
+    }
+  })
+});
 
+players.forEach(function(player) {
+  console.log(`${player.name} score: ${player.score}`);
+});
 
-console.log(`${titForTat.name} score: ${titForTat.score}`);
-console.log(`${randomChoice.name} score: ${randomChoice.score}`);
-console.log(`${alwaysBetray.name} score: ${alwaysBetray.score}`);
-console.log(`${alwaysCooperate.name} score: ${alwaysCooperate.score}`);
