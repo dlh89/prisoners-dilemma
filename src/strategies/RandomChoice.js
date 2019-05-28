@@ -1,8 +1,8 @@
-export default class RandomChoice {
-  constructor() {
-    this.name = 'Random choice';
-    this.opponentHistory = false;
-    this.score = 0;
+import Strategy from "../../lib/strategies/Strategy";
+
+export default class RandomChoice extends Strategy {
+  constructor(name) {
+    super(name)
   }
 
   play(iteration) {

@@ -1,8 +1,8 @@
-export default class AlwaysCooperate {
-  constructor() {
-    this.name = 'Always co-operate';
-    this.opponentHistory = false;
-    this.score = 0;
+import Strategy from "../../lib/strategies/Strategy";
+
+export default class AlwaysCooperate extends Strategy {
+  constructor(name) {
+    super(name)
   }
 
   play(iteration) {

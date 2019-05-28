@@ -1,8 +1,8 @@
-export default class AlwaysBetray {
-  constructor() {
-    this.name = 'Always betray';
-    this.opponentHistory = false;
-    this.score = 0;
+import Strategy from "../../lib/strategies/Strategy";
+
+export default class AlwaysBetray extends Strategy {
+  constructor(name) {
+    super(name)
   }
 
   play(iteration) {

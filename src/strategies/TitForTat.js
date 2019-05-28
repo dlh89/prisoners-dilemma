@@ -1,8 +1,8 @@
-export default class TitForTat {
-  constructor() {
-    this.name = 'Tit for tat';
-    this.opponentHistory = [];
-    this.score = 0;
+import Strategy from "./Strategy";
+
+export default class TitForTat extends Strategy {
+  constructor(name) {
+    super(name);
   }
 
   play(iteration) {

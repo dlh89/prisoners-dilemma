@@ -1,6 +1,6 @@
 export default class PrisonersDilemma {
   constructor() {
-    this.iterations = 5;
+    this.iterations = 200;
   }
 
   /**
@@ -26,9 +26,12 @@ export default class PrisonersDilemma {
     return -1;
   }
 
-  pushHistory(player, opponentBetray) {
+  pushHistory(player, selfBetray, opponentBetray) {
     if (player.opponentHistory) {
       player.opponentHistory.push(opponentBetray);
+    }
+    if (player.history) {
+      player.history.push(selfBetray);
     }
   }
 
@@ -36,15 +39,24 @@ export default class PrisonersDilemma {
     for (let i = 0; i < this.iterations; i++) {
       const playerOneBetray = playerOne.play(i);
       const playerTwoBetray = playerTwo.play(i);
-      console.log(`${playerOne.name} betray: ${playerOneBetray}`);
-      console.log(`${playerTwo.name} betray: ${playerTwoBetray}`);
-      console.log("...");
+      // console.log(`${playerOne.name} betray: ${playerOneBetray}`);
+      // console.log(`${playerTwo.name} betray: ${playerTwoBetray}`);
+      // console.log("...");
 
       playerOne.score += this.calcResult(playerOneBetray, playerTwoBetray);
       playerTwo.score += this.calcResult(playerTwoBetray, playerOneBetray);
 
-      this.pushHistory(playerOne, playerTwoBetray);
-      this.pushHistory(playerTwo, playerOneBetray);
+      this.pushHistory(playerOne, playerOneBetray, playerTwoBetray);
+
+      // avoid duplicating history when players face themself
+      if (playerOne !== playerTwo) {
+        this.pushHistory(playerTwo, playerTwoBetray, playerOneBetray);
+      }
+    }
+    playerOne.opponentsFaced.push(playerTwo.name);
+    // avoid duplicating opponents faced when players face themself
+    if (playerOne !== playerTwo) {
+      playerTwo.opponentsFaced.push(playerOne.name);
     }
   }
 }
