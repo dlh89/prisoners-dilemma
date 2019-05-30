@@ -12,7 +12,7 @@ export default class Pavlov extends Strategy{
     }
 
     // retaliate if opponent betrayed on any of the previous 3 iterations
-    if (this.opponentHistory[iteration - 1] === this.history[iteration - 1]) {
+    if (this.games[this.games.length - 1].opponentHistory[iteration - 1] === this.games[this.games.length - 1].history[iteration - 1]) {
       return true;
     }
 

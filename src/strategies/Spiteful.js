@@ -13,7 +13,7 @@ export default class Spiteful extends Strategy {
 
     // retaliate if opponent betrayed on any of the previous iterations
     for (var i = 0; i < iteration; i++) {
-      if (this.opponentHistory[i]) {
+      if (this.games[this.games.length - 1].opponentHistory[i]) {
         return true;
       }
     }

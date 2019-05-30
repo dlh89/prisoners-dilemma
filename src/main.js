@@ -31,6 +31,7 @@ players.forEach(function(player) {
   // play against every player they haven't already faced (including themselves)
   players.forEach(function(opponent) {
     // ignore opponents already faced
+    // TODO convert to arr filter
     if (!player.opponentsFaced.includes(opponent.name)) {
       prisonersDilemma.simulateGame(player, opponent);
     }
@@ -40,4 +41,3 @@ players.forEach(function(player) {
 players.forEach(function(player) {
   console.log(`${player.name} score: ${player.score}`);
 });
-

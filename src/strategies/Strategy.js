@@ -1,8 +1,7 @@
 export default class Strategy {
   constructor(name) {
     this.name = name;
-    this.history = [];
-    this.opponentHistory = [];
+    this.games = [];
     this.opponentsFaced = [];
     this.score = 0;
   }

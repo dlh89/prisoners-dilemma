@@ -12,9 +12,9 @@ export default class TitForTat extends Strategy{
     }
 
     // retaliate if opponent betrayed on any of the previous 3 iterations
-    if (this.opponentHistory[iteration - 1]
-      || this.opponentHistory[iteration - 2]
-      || this.opponentHistory[iteration - 3]
+    if (this.games[this.games.length - 1].opponentHistory[iteration - 1]
+      || this.games[this.games.length - 1].opponentHistory[iteration - 2]
+      || this.games[this.games.length - 1].opponentHistory[iteration - 3]
       ) {
       return true;
     }

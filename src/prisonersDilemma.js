@@ -1,3 +1,5 @@
+import Game from './Game';
+
 export default class PrisonersDilemma {
   constructor() {
     this.iterations = 200;
@@ -28,35 +30,56 @@ export default class PrisonersDilemma {
 
   pushHistory(player, selfBetray, opponentBetray) {
     if (player.opponentHistory) {
-      player.opponentHistory.push(opponentBetray);
+      player.game[player.game.length - 1].opponentHistory.push(opponentBetray);
     }
     if (player.history) {
-      player.history.push(selfBetray);
+      player.game[player.game.length - 1].history.push(selfBetray);
     }
   }
 
   simulateGame(playerOne, playerTwo) {
-    for (let i = 0; i < this.iterations; i++) {
-      const playerOneBetray = playerOne.play(i);
-      const playerTwoBetray = playerTwo.play(i);
-      // console.log(`${playerOne.name} betray: ${playerOneBetray}`);
-      // console.log(`${playerTwo.name} betray: ${playerTwoBetray}`);
-      // console.log("...");
-
-      playerOne.score += this.calcResult(playerOneBetray, playerTwoBetray);
-      playerTwo.score += this.calcResult(playerTwoBetray, playerOneBetray);
-
-      this.pushHistory(playerOne, playerOneBetray, playerTwoBetray);
-
-      // avoid duplicating history when players face themself
-      if (playerOne !== playerTwo) {
-        this.pushHistory(playerTwo, playerTwoBetray, playerOneBetray);
+    // setup
+    const players = [playerOne, playerTwo];
+    players.forEach((function(player) {
+      let opponent = players.filter(filterPlayer => filterPlayer !== player)[0];
+      if (!opponent) {
+        // playing against themselves
+        opponent = player;
       }
+      const game = new Game();
+      player.games.push(game);
+      player.opponentsFaced.push(opponent.name);
+    }));
+
+    for (let i = 0; i < this.iterations; i++) {
+      // const playerOneBetray = playerOne.play(i);
+      // const playerTwoBetray = playerTwo.play(i);
+
+      // play moves for this round
+      players.forEach(function(player) {
+        let opponent = players.filter(filterPlayer => filterPlayer !== player)[0];
+        if (!opponent) {
+          // playing against themselves
+          opponent = player;
+        }
+        // TODO avoid duplicating history when players face themselves
+        player.games[player.games.length - 1].history.push(player.play(i));
+        player.games[player.games.length - 1].opponentHistory.push(opponent.play(i));
+      });
+
+      // update player objects
+      players.forEach((player) => {
+        let opponent = players.filter(filterPlayer => filterPlayer !== player)[0];
+        if (!opponent) {
+          // playing against themselves
+          opponent = player;
+        }
+        const playerBetray = player.games[player.games.length - 1].history[i];
+        const opponentBetray = opponent.games[opponent.games.length - 1].history[i];
+        player.score += this.calcResult(playerBetray, opponentBetray);
+        player.games[player.games.length - 1].score += this.calcResult(playerBetray, opponentBetray);
+      });
     }
-    playerOne.opponentsFaced.push(playerTwo.name);
-    // avoid duplicating opponents faced when players face themself
-    if (playerOne !== playerTwo) {
-      playerTwo.opponentsFaced.push(playerOne.name);
-    }
+    console.log(`${playerOne.name}: ${playerOne.games[playerOne.games.length - 1].score} | ${playerTwo.name}: ${playerTwo.games[playerTwo.games.length - 1].score}`)
   }
 }
