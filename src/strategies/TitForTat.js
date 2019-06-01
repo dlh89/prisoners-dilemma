@@ -1,8 +1,9 @@
 import Strategy from "./Strategy";
 
 export default class TitForTat extends Strategy {
-  constructor(name) {
-    super(name);
+  constructor() {
+    super();
+    this.name = 'Tit for Tat';
   }
 
   play(iteration) {

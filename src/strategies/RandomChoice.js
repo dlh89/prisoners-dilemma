@@ -1,8 +1,9 @@
 import Strategy from "../../lib/strategies/Strategy";
 
 export default class RandomChoice extends Strategy {
-  constructor(name) {
-    super(name)
+  constructor() {
+    super();
+    this.name = 'Random Choice';
   }
 
   play(iteration) {

@@ -1,8 +1,9 @@
 import Strategy from "./Strategy";
 
 export default class Spiteful extends Strategy {
-  constructor(name) {
-    super(name);
+  constructor() {
+    super();
+    this.name = 'Spiteful';
   }
 
   play(iteration) {

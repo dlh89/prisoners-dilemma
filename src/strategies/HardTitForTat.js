@@ -1,8 +1,9 @@
 import Strategy from "../../lib/strategies/Strategy";
 
-export default class TitForTat extends Strategy{
-  constructor(name) {
-    super(name)
+export default class HardTitForTat extends Strategy{
+  constructor() {
+    super();
+    this.name = 'Hard Tit for Tat';
   }
 
   play(iteration) {

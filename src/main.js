@@ -1,5 +1,6 @@
 import PrisonersDilemma from './PrisonersDilemma';
 import TitForTat from './strategies/TitForTat';
+import SuspiciousTitForTat from './strategies/SuspiciousTitForTat';
 import HardTitForTat from './strategies/HardTitForTat';
 import Pavlov from './strategies/Pavlov';
 import Spiteful from './strategies/Spiteful';
@@ -9,16 +10,18 @@ import AlwaysCooperate from './strategies/AlwaysCooperate';
 
 const prisonersDilemma = new PrisonersDilemma();
 
-const titForTat = new TitForTat('Tit for Tat');
-const hardTitForTat = new HardTitForTat('Hard Tit for Tat');
-const pavlov = new Pavlov('Pavlov');
-const spiteful = new Spiteful('Spiteful');
-const randomChoice = new RandomChoice('Random Choice');
-const alwaysBetray = new AlwaysBetray('Always Betray');
-const alwaysCooperate = new AlwaysCooperate('Always Cooperate');
+const titForTat = new TitForTat();
+const suspiciousTitForTat = new SuspiciousTitForTat();
+const hardTitForTat = new HardTitForTat();
+const pavlov = new Pavlov();
+const spiteful = new Spiteful();
+const randomChoice = new RandomChoice();
+const alwaysBetray = new AlwaysBetray();
+const alwaysCooperate = new AlwaysCooperate();
 
 const players = [
   titForTat,
+  suspiciousTitForTat,
   hardTitForTat,
   pavlov,
   spiteful,
@@ -38,6 +41,8 @@ players.forEach(function(player) {
   })
 });
 
-players.forEach(function(player) {
+const sortedPlayers = players.sort((a, b) => a.score - b.score);
+
+sortedPlayers.forEach(function(player) {
   console.log(`${player.name} score: ${player.score}`);
 });

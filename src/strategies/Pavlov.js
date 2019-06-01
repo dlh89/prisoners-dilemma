@@ -1,8 +1,9 @@
 import Strategy from "../../lib/strategies/Strategy";
 
 export default class Pavlov extends Strategy{
-  constructor(name) {
-    super(name)
+  constructor() {
+    super();
+    this.name = 'Pavlov';
   }
 
   play(iteration) {
