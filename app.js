@@ -21,10 +21,10 @@ io.on('connection', function(socket) {
 
   socket.on('disconnecting', function() {
     console.log('user disconnected');
-    console.log('socket.id:' , socket.id);
+    console.log('socket.id:', socket.id);
     // send message to room that user has connected
     var currentRoom = Object.keys(socket.rooms).filter(item => item!=socket.id);
-    console.log('currentRoom: ', currentRoom);
+    console.log('currentRoom:', currentRoom);
     io.sockets.in(currentRoom).emit('msg', 'User ' + socket.id + ' left the room.');
    });
 

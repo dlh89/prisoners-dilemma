@@ -28,15 +28,6 @@ export default class PrisonersDilemma {
     return -1;
   }
 
-  pushHistory(player, selfBetray, opponentBetray) {
-    if (player.opponentHistory) {
-      player.game[player.game.length - 1].opponentHistory.push(opponentBetray);
-    }
-    if (player.history) {
-      player.game[player.game.length - 1].history.push(selfBetray);
-    }
-  }
-
   simulateGame(playerOne, playerTwo) {
     // setup
     const players = [playerOne, playerTwo];
@@ -52,9 +43,6 @@ export default class PrisonersDilemma {
     }));
 
     for (let i = 0; i < this.iterations; i++) {
-      // const playerOneBetray = playerOne.play(i);
-      // const playerTwoBetray = playerTwo.play(i);
-
       // play moves for this round
       players.forEach(function(player) {
         let opponent = players.filter(filterPlayer => filterPlayer !== player)[0];

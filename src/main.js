@@ -41,8 +41,8 @@ players.forEach(function(player) {
   })
 });
 
-const sortedPlayers = players.sort((a, b) => a.score - b.score);
+const sortedPlayers = players.sort((a, b) => b.score - a.score);
 
-sortedPlayers.forEach(function(player) {
-  console.log(`${player.name} score: ${player.score}`);
+sortedPlayers.forEach(function(player, i) {
+  console.log(`${i + 1} | ${player.name} (${player.score})`);
 });
