@@ -7,6 +7,9 @@ import Spiteful from './strategies/Spiteful';
 import RandomChoice from './strategies/RandomChoice';
 import AlwaysBetray from './strategies/AlwaysBetray';
 import AlwaysCooperate from './strategies/AlwaysCooperate';
+import AlternateBetray from './strategies/AlternateBetray';
+import NaiveProber from './strategies/NaiveProber';
+import RemorsefulProber from './strategies/RemorsefulProber';
 
 const prisonersDilemma = new PrisonersDilemma();
 
@@ -18,6 +21,9 @@ const spiteful = new Spiteful();
 const randomChoice = new RandomChoice();
 const alwaysBetray = new AlwaysBetray();
 const alwaysCooperate = new AlwaysCooperate();
+const alternateBetray = new AlternateBetray();
+const naiveProber = new NaiveProber();
+const remorsefulProber = new RemorsefulProber();
 
 const players = [
   titForTat,
@@ -27,7 +33,10 @@ const players = [
   spiteful,
   randomChoice,
   alwaysBetray,
-  alwaysCooperate
+  alwaysCooperate,
+  alternateBetray,
+  naiveProber,
+  remorsefulProber
 ]
 
 players.forEach(function(player) {
