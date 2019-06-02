@@ -53,13 +53,20 @@ export default class PrisonersDilemma {
         // TODO avoid duplicating history when players face themselves
         player.games[player.games.length - 1].history.push(player.play(i));
         player.games[player.games.length - 1].opponentHistory.push(opponent.play(i));
+      });
 
-        // update player objects
+      // update player objects
+      players.forEach((player) => {
+        let opponent = players.filter(filterPlayer => filterPlayer !== player)[0];
+        if (!opponent) {
+          // playing against themselves
+          opponent = player;
+        }
         const playerBetray = player.games[player.games.length - 1].history[i];
         const opponentBetray = opponent.games[opponent.games.length - 1].history[i];
         player.score += this.calcResult(playerBetray, opponentBetray);
         player.games[player.games.length - 1].score += this.calcResult(playerBetray, opponentBetray);
-      }.bind(this));
+      });
     }
     console.log(`${playerOne.name}: ${playerOne.games[playerOne.games.length - 1].score} | ${playerTwo.name}: ${playerTwo.games[playerTwo.games.length - 1].score}`)
   }
