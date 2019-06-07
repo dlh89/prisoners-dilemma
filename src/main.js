@@ -1,5 +1,6 @@
 import PrisonersDilemma from './PrisonersDilemma';
 import TitForTat from './strategies/TitForTat';
+import TitForTwoTats from './strategies/TitForTwoTats';
 import SuspiciousTitForTat from './strategies/SuspiciousTitForTat';
 import HardTitForTat from './strategies/HardTitForTat';
 import Pavlov from './strategies/Pavlov';
@@ -10,10 +11,13 @@ import AlwaysCooperate from './strategies/AlwaysCooperate';
 import AlternateBetray from './strategies/AlternateBetray';
 import NaiveProber from './strategies/NaiveProber';
 import RemorsefulProber from './strategies/RemorsefulProber';
+import PeriodicBetray from './strategies/PeriodicBetray';
+import PeriodicCooperate from './strategies/PeriodicCooperate';
 
 const prisonersDilemma = new PrisonersDilemma();
 
 const titForTat = new TitForTat();
+const titForTwoTats = new TitForTwoTats();
 const suspiciousTitForTat = new SuspiciousTitForTat();
 const hardTitForTat = new HardTitForTat();
 const pavlov = new Pavlov();
@@ -24,9 +28,12 @@ const alwaysCooperate = new AlwaysCooperate();
 const alternateBetray = new AlternateBetray();
 const naiveProber = new NaiveProber();
 const remorsefulProber = new RemorsefulProber();
+const periodicBetray = new PeriodicBetray();
+const periodicCooperate = new PeriodicCooperate();
 
 const players = [
   titForTat,
+  titForTwoTats,
   suspiciousTitForTat,
   hardTitForTat,
   pavlov,
@@ -36,7 +43,9 @@ const players = [
   alwaysCooperate,
   alternateBetray,
   naiveProber,
-  remorsefulProber
+  remorsefulProber,
+  periodicBetray,
+  periodicCooperate
 ]
 
 players.forEach(function(player) {
