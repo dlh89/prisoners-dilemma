@@ -6,7 +6,7 @@ export default class PrisonersDilemma {
   }
 
   /**
-    * player betrays and opponent doesnt: 0
+    * player betrays and opponent doesn't: 0
     * both betray: -2
     * player stays silent and opponent betrays: -3
     * @param {bool} playerBetray
@@ -42,9 +42,11 @@ export default class PrisonersDilemma {
       player.opponentsFaced.push(opponent.name);
     }));
 
+    
     for (let i = 0; i < this.iterations; i++) {
       // play moves for this round
       players.forEach(function(player, index) {
+        const currentGame = player.games[player.games.length - 1];
         let opponent = players.filter(filterPlayer => filterPlayer !== player)[0];
         if (!opponent) {
           // playing against themselves
@@ -53,33 +55,34 @@ export default class PrisonersDilemma {
         // avoid duplicating history when players face themselves
         if (opponent === player) {
           if (index === 0) {
-            player.games[player.games.length - 1].history.push(player.play(i));
-            player.games[player.games.length - 1].opponentHistory.push(opponent.play(i));
+            currentGame.history.push(player.play(i));
+            currentGame.opponentHistory.push(opponent.play(i));
           }
         } else {
-          player.games[player.games.length - 1].history.push(player.play(i));
-          player.games[player.games.length - 1].opponentHistory.push(opponent.play(i));
+          currentGame.history.push(player.play(i));
+          currentGame.opponentHistory.push(opponent.play(i));
         }
       });
 
       // update player objects
       players.forEach((player, index) => {
+        const currentGame = player.games[player.games.length - 1];
         let opponent = players.filter(filterPlayer => filterPlayer !== player)[0];
         if (!opponent) {
           // playing against themselves
           opponent = player;
         }
-        const playerBetray = player.games[player.games.length - 1].history[i];
+        const playerBetray = currentGame.history[i];
         const opponentBetray = opponent.games[opponent.games.length - 1].history[i];
         // avoid duplicating scores when players face themselves
         if (opponent === player) {
           if (index === 0) {
             player.score += this.calcResult(playerBetray, opponentBetray);
-            player.games[player.games.length - 1].score += this.calcResult(playerBetray, opponentBetray);
+            currentGame.score += this.calcResult(playerBetray, opponentBetray);
           }
         } else {
           player.score += this.calcResult(playerBetray, opponentBetray);
-          player.games[player.games.length - 1].score += this.calcResult(playerBetray, opponentBetray);
+          currentGame.score += this.calcResult(playerBetray, opponentBetray);
         }
       });
     }
