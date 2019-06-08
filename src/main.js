@@ -13,6 +13,8 @@ import NaiveProber from './strategies/NaiveProber';
 import RemorsefulProber from './strategies/RemorsefulProber';
 import PeriodicBetray from './strategies/PeriodicBetray';
 import PeriodicCooperate from './strategies/PeriodicCooperate';
+import SoftMajority from './strategies/SoftMajority';
+import HardMajority from './strategies/HardMajority';
 
 const prisonersDilemma = new PrisonersDilemma();
 
@@ -30,6 +32,8 @@ const naiveProber = new NaiveProber();
 const remorsefulProber = new RemorsefulProber();
 const periodicBetray = new PeriodicBetray();
 const periodicCooperate = new PeriodicCooperate();
+const softMajority = new SoftMajority();
+const hardMajority = new HardMajority();
 
 const players = [
   titForTat,
@@ -45,8 +49,10 @@ const players = [
   naiveProber,
   remorsefulProber,
   periodicBetray,
-  periodicCooperate
-]
+  periodicCooperate,
+  softMajority,
+  hardMajority
+];
 
 players.forEach(function(player) {
   // play against every player they haven't already faced (including themselves)

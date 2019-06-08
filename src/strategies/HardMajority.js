@@ -1,9 +1,9 @@
 import Strategy from "./Strategy";
 
-export default class SoftMajority extends Strategy {
+export default class HardMajority extends Strategy {
   constructor() {
     super();
-    this.name = 'Soft Majority';
+    this.name = 'Hard Majority';
   }
 
   play(iteration) {
@@ -17,8 +17,8 @@ export default class SoftMajority extends Strategy {
     const playerBetrayals = this.tallyBetrayals(currentGame.history);
     const opponentBetrayals = this.tallyBetrayals(currentGame.opponentHistory);
 
-    // retaliate if opponent has betrayed more
-    if (opponentBetrayals > playerBetrayals) {
+    // retaliate if opponent has betrayed as much or more
+    if (opponentBetrayals && opponentBetrayals >= playerBetrayals) {
       return true;
     }
 
