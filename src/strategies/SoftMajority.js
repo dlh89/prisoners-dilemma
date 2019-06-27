@@ -18,7 +18,7 @@ export default class SoftMajority extends Strategy {
     const opponentBetrayals = this.tallyBetrayals(currentGame.opponentHistory);
 
     // retaliate if opponent has betrayed more
-    if (opponentBetrayals > playerBetrayals) {
+    if (opponentBetrayals && opponentBetrayals > playerBetrayals) {
       return true;
     }
 
